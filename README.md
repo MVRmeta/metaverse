@@ -1,5 +1,5 @@
 
-MVR Studio is an open-source metaverse, developed by Glare Technologies Limited, see https://nightstudio.io/.
+MVR Studio is an open-source metaverse, developed by Glare Technologies Limited.
 
 The MVR Studio client and server are native apps written in C++, that support Windows, Mac and Linux.
 There is also an in-development web-client.
