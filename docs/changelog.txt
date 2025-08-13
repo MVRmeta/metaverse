@@ -1,0 +1,427 @@
+1.2
+===
+Added minimap
+Added red dot markers for other avatars
+Added terrain
+Added grass
+Added water
+Added boats
+Added particle system - smoke, splashes etc.
+Made time of day configurable with Window > Environment dialog
+Added World Settings widget
+Fixed microphone input on Mac.
+Open-sourced most of the code: https://github.com/glaretechnologies/substrata
+
+1.1
+===
+General optimisations to reduce CPU load, for main game loop and for rendering:
+	greatly increases frame rate in many cases.
+Fix for very slow rendering on Macs.
+Added new video object type, and Add Video dialog.
+Added new UI for videos, with autoplay, loop, and mute options.
+Made videos and web-views use emission instead of (reflection) colour channel.
+Reduced wind volume a bit.
+Fixed spotlights not affecting avatars.
+Fixed hologram materials not working properly.
+
+1.0
+====
+Lots of graphics engine optimisations, 3x faster in some cases.
+Added voice chat:
+	Added audio input device selection in options dialog
+	Added enable microphone for voice chat button
+Slightly better leaning while turning for bikes.
+
+0.99
+====
+Added bike and hovercar vehicles.
+Added 'summon bike' and 'summon hovercar' menu commands.
+Added materialise shader effect for just-created and summoned objects, as well as new avatars.
+Avoid discontinuous jumps in physics object visible transformations.
+Taking skinning transformation into account when creating physics mesh.
+Adjusting for eye height properly, fixes player spawning a few metres off the ground.
+Added mute audio action in Tools menu.
+Using third person camera position, if applicable, for audio listener position.
+Added a rushing wind sound effect when the player moves fast.
+Added last_modified_time to WorldObject.
+Storing object-space AABB in WorldObject instead of world-space AABB.
+Fixed object transform updates not displaying on other clients sometimes.
+Bumped required protocol version to 37.
+Improved colour handling for OBJ import:
+	Assume colours in MTL files are linear.
+	Add the ambient and diffuse colours together to get the final colour, otherwise the result can be too dark.
+Fixed bug with imported GLTF constant material colours having incorrect gamma.
+Added FPS limit option to options dialog.
+
+0.98
+====
+Added initial implementation of networked physics for dynamic objects.
+Added initial implementation of hovercar physics and scripting.
+Added initial XML scripting with follow (path controller) script.
+Added 'dynamic' checkbox in object editor to make objects dynamic physics objects.
+Added visualisation of paths when object is selected.
+Added 'Go to Position' dialog and command in Go menu.
+Added 'Set current location as start location' and 'Go To Start Location' commands in Go menu.
+Updating audio source position for moving scripted objects.
+Added option to change cache directory (for downloaded resources)
+Made scrolling in and out sufficiently far transition between first and third person camera views.
+Slightly increased player physics capsule height to be more in line with the default avatar model.
+Reorganised ObjectEditor a bit - put audio group near the bottom etc, Added physics group.
+Added mass, friction, restitution spinboxes.
+Fixed OpenGL error when closing AddObjectDialog and AvatarSettingsDialog in some cases.
+Updated Jolt with fix for getting stuck against edges when jumping. (https://github.com/jrouwe/JoltPhysics/issues/363)
+Playerphysics: Fixed jumping not working properly in some cases.
+Using LRU cache for opengl meshes and physics shapes - reduces loading while moving around.
+Fixed a few issues with objects with zero scale components.
+Fixed issue with mouseover info not showing up in some cases (e.g. when not moving mouse)
+Removed behaviour when avatar would spin rapidly in some cases.
+Fixed some avatars being embedded in the ground with some animations.
+
+0.97
+====
+Using Jolt physics engine for player physics and other physics.
+Added monorail train movement code.
+Added path controller for moving objects around a path.
+Taking into account ground velocity when jumping in player physics.
+Positioning pasted objects: position near to source object if camera is nearby source object.
+Cloning an object: Use axis-aligned offset vector for choosing new cloned object position.
+Fixed move arrows being wrong on newly created voxel objects.
+Fixed abrupt visual changes between trees and their imposters in some cases.
+Fixed conversion of meshes to bmesh when editing object model_url.
+Fixed updated mesh not showing in opengl engine when editing object model_url.
+Changed instancing max count to 100.
+	
+0.96
+====
+Improved voxel meshing: only create a face between voxels with different materials, when one is transparent.
+Fixed Substrata not closing immediately when a long download is in progress.
+Faster client startups due to not scanning for resource presence.
+Fixed some videos not looping.
+Allowing loading of models in AddObjectDialog and AvatarSettingsDialog, even if some textures are missing or invalid.
+Improved speed of loading objects on initial connect to server.
+Added importance factor for item loading queue.  Prioritising loading our own avatar first.
+Clearing online user and chat message box on disconnect from server.
+Various speed improvements for loading objects.
+Loading textures in chunks to reduce stuttering.
+
+0.95
+====
+Added hologram check box in material editor.
+Optimised voxel loading.
+Sanitising albedo colour in ModelLoading.  Fixes extremely bright light coming from RTFKT pods.
+Some graphics fixes + optimisations.
+Loading emission factor and textures in the GLTF loader.
+Added cloud reflections to transparent material shader.
+Always rendering to offscreen buffer.
+Added initial implementation of order-independent transparency.
+Added local light reflections to transparent shader.
+Changed main colour buffer and downsize/blur buffers to use half-precision floats, instead of full-precision.
+Added emission support to transparent materials.
+Not showing material editor when selecting spotlights in the object editor.
+Added colour button to spotlight editor.
+Fixed up/down keys not moving player on mac + linux.
+If opengl widget loses focus, just consider all keys up on mac + linux.
+Fixed changing world hanging sometimes (hopefully)
+Fix occasional deadlock communicating with server.
+Fixed some jitter while moving around in some cases.
+Make it so the toolbar can't be hidden, as it's confusing for users when it disappears.
+Gifs now play further away than 20m: up to 200m depending on object size.
+Fixed axis arrows and rotation arcs not being in correct place for newly created objects in some cases, which was causing glitches when dragging them.
+Fixed issue with stutters while moving or rotating objects in some cases.
+Fixed axis arrows not being selectable when intersecting camera front half-space plane.
+
+0.94
+====
+Added emission texture, emission RGB, and luminance settings to materials.
+Added initial realtime spotlight support.
+Added bloom/glow effect for bright light on non-Mac platforms.
+Added new spotlight 3d model.
+Using reverse-z instead of logarithmic depth buffer.  Fixes various visual artifacts.
+Changed way shadow mapping works - fixes some light leaks.
+Fixed crash loading materials in some circumstances.
+Fixed crash due to scripted physics objects moving.
+
+0.93
+====
+Optimised player physics - much faster now.
+Optimised gif playback a bit.
+Fixed case sensitivity for handling file extensions in some cases.
+Fixed gamma on mp4 video playback being wrong.
+Fixed playback of vertical videos (fixed bars down side of them).
+Fixed crash when closing substrata when an object is selected.
+Fixed footsteps not playing if frame rate was high enough.
+Improved footstep period for walk and run cycles.
+Using streaming to play MP3s instead of decoding the entire MP3 file up-front.
+Made all audio sources playing the same stream play back in sync.
+Fixed selection of audio file not picking file name properly.
+Fixed cloning audio source not cloning audio_url. 
+Fixed axis arrows and rotation arcs being grabbable even without permissions and when not visible.
+Fixed object copy and paste shortcuts messing with global copy and paste.
+Fixed mousing over web view while moving camera unhiding pointer.
+
+0.92
+====
+Added initial drag and drop capability for images and models.
+Added copy and paste commands.
+Rendering optimisations for animated objects - only process if in view of camera etc.
+Other general rendering optimisations
+Handling invalid weights leading to incorrect animation rendering in some cases.
+Fixed issue with AABB not being updated properly when objects are moved around, and hence sound playing from wrong place etc.
+Fixed crash from CEF audio stuff being done on another thread.
+Fixed multiple objects have selection outlines in some cases.
+
+0.90, 0.91
+==========
+Added web view - embeds a web browser in an object.
+Made video (mp4) playback use embedded web browser.  Now works on all platforms (windows, mac, linux), fixes stutters on Windows.
+Allocating mesh data from 1 or a few VBOS: gives better FPS.
+Loading mesh data in chunks, reduces stuttering.
+Fixed issue with multiple LoadModelTasks being created for a single model, and hence not all placeholder box models showing up.
+Moved hypercard texture making off the main thread. (reduces stuttering)
+Moved script loading into a task. (reduces stuttering)
+Reduced list of accepted audio file formats to just .wav and .mp3 for now.
+Refactored and optimised audio file loading.
+Uploading lightmaps as DWAB exrs instead of bc6h ktx2 files.
+Fixed substrata not closing on linux properly
+Using pulse audio instead of alsa on linux.
+Enabling showing EXR lightmaps on mac.
+Don't try to re-download resources if we already failed to download this session.
+Added crash reporting with BugSplat on Windows.
+Removed BMP and TGA from list of supported image formats.
+Added LoadItemQueue. Sorting loading items by proximity to camera and size.
+
+0.89
+====
+Various 3d engine optimisations:
+VAO sharing, bindless textures etc.
+
+0.88
+====
+Select just-created objects.
+Orient newly created objects towards camera, rounding to nearest multiple of 45 degrees.
+When creating image or mp4 objects, use a standard image_cube mesh.
+ObjectEditor: maintain ratios between scale components when link-scales is enabled.
+Changed target_url to a line edit from a text edit control.
+Added some initial webview code.
+Disabled gamepad support for now.
+Added spawn point setting to parcels - determines where a user will spawn (join the world) when they use Go > Go to parcel.
+Added UI for setting it to the in-world parcel editor.
+
+0.87
+====
+Added mouse-over hyperlink showing for object target URLs.
+Optimised initial query for objects, fixes disconnection bug when object load distance is too large.
+Improvements to PlayerPhysics to reduce sliding down ramps, also to reduce getting stuck in objects.
+Fixed avatar forwards/back lean direction for flying.
+Turning off selfie mode when turning off third-person camera mode.
+Fixed some server mem leaks.
+
+0.86
+====
+Tweaked player physics to avoid avatar getting stuck in objects.
+
+0.85
+====
+Added some stair-climbing physics.
+Fixed various issues with objects loading in duplicate when moving around.
+Made it so that you can edit objects created by other people in parcels you have write permissions for.
+Added metallic-roughness texture support.
+
+0.84
+====
+Fixed linux build handling of LLVM libs.
+Made substrata exe clickable in Gnome files app on Linux
+Small improvement/fix in download queue ordering.
+Fix leak of audio source when creating audio sources for mp4 textures.
+Allowing execution to continue if audio engine fails to initialise.
+For voxel objects, push out the transition distances a bit.
+webclient improvements:
+	Improved transparent colours.
+	Made vertex colours work.
+	Use linear tone mapping with a scale less than 1, which seems to be needed to make the sky model look good.
+	Made ground use lots of quads to improve z fighting.
+	Tweaked texture loading code so tex matrix should be preserved.
+	Made initial query centre around camera position.
+	Enabled backface rendering.
+	Added MAX_OB_LOAD_DISTANCE_FROM_CAM of 200 m
+	Added use of download queue in webclient
+	Added "xx left" message.
+	Enabled alpha testing.
+	Moving shadow map 'camera' with actual camera.
+
+0.83
+====
+Added blob shadows for closest avatars.
+Fixed avatar sometimes rotating when first made visible, for example when performing a gesture.
+Made 'v' key toggle third-person camera mode.
+Rendering speed optimisations.
+Animation retargetting: handle cases where new bone nodes are in reverse order, fixes cyberpirate model.
+Made it so you can edit parcel descriptions, all-writable and mute-outside-audio in parcel editor.
+Implmented 'mute outside audio' option for parcels.
+
+0.82
+====
+Offset the voxel positions so that the origin is in the middle at the bottom of the voxel AABB.
+Auto-scaling loaded vox model so it's a reasonable size.
+Using ob_origin_ws instead of AABB centroid for determining which direction the axis arrow points for move/rotate tool.
+Fixed dragging of move handle arrows making object disappear in some cases, especially for newly created objects.
+Added 'Link x/y/z scale' checkbox to object editor.
+Move/rotate arrows are now always visible, even when inside or behind objects.
+Optimised voxel loading.
+Fixed not being able to select and right click and copy the URL from URL bar.
+
+0.81
+====
+Added option in options dialogue to enable/disable MSAA.
+Do auto-setting of graphics options, if they have not been set:
+MSAA will be off by default if the user is on retina screens or a GPU with Intel vendor
+Fixed crash when selecting hypercard.
+
+0.80
+====
+Fixed gesture buttons not being clickable on Macs with retina screens.
+When a gesture button is pressed, change camera to third-person view.
+Stopping playing any gestures when moving the avatar.
+Made it so that help info window doesn't pop up if you have closed it already.
+Fixed delete key not deleting objects on Mac.
+Updated avatar animations: sitting pose should be on ground now.  
+Sitting talking animation is shorter.
+
+0.79
+====
+Made mouse scroll wheel zoom in/out in third person camera view.
+Not showing nametag above user's avatar in 3rd person camera mode.
+Not playing entry teleport sound when changing to 3rd person view.
+Testing if on ground recently instead of on last frame only, for avatar animation.
+Made third person cam target eye midpoint instead of head node.
+Made the protocol messages length-prefixed.
+
+0.78
+====
+Indicating to the system that we want to run on a dedicated GPU if present, on Windows.
+
+0.77
+====
+Downloading objects closer to camera first.
+Fixed crash on Mac on close.
+
+0.76
+====
+Added logarithmic depth buffer support.
+Fixed shadow issue leading to white screen on some Intel GPUs
+
+0.75
+====
+Fixed audio not loading when audio file is first downloaded.
+Hopefully fixed bug where audio continues to play > 60m away from source in some circumstances.
+Added audio source occlusion.
+Added audio room effects.
+Fixed stutter when loading large audio files.
+Enabled wind shader on biome trees (WIP)
+Added initial double-sided material support for biome tree. (WIP)
+Fixed reloading of objects into biome.
+Fixed biome scattering to wait until object is loaded in.
+Improved cancelling of loading models and textures when disconnecting from server.
+Putting max size on move/rotate controls.
+Fixed object rotation being reset when object is picked up.
+Fixed texture LOD levels not being transparent upon creation in some cases.
+Improved shadow map quality
+
+0.74
+====
+Added biome stuff.
+Added park biome with Elm trees.
+Added take screenshot action.
+Improved flying physics.  Can now fly fast backwards etc. as well as forwards.
+Added lightmap LOD support.
+Improved lightmap brightness.
+Fixed lightmap/texture lod levels on voxel objects.
+
+0.73
+====
+Added Edit > Add Audio Source command.
+Added voxel LOD with subsampling/downsizing.
+Printing out vert and index mem usage in diagnostics for selected mesh.
+Made tri mesh LOD level 1 simplification more aggressive in some cases.
+Added a new LOD level for high res textures, avoids loading the full res texture until you are close by.
+Setting min_w_h = 1 for texture LOD generation.
+
+0.71, 0.72
+==========
+Added initial audio support for objects.
+
+0.70
+====
+Added gesture support and buttons.
+Added selfie mode.
+
+0.69
+====
+Improved procedural avatar head and eye movement - head and eyes will follow the camera direction.
+Added support for the VRM format for avatars.
+
+0.66
+====
+Added loading and display of animations of skinned GLTF/GLB meshes.
+When loading a gltf model, instead of transforming verts to z-up, setting an axis angle rotation on the object.
+Objects added to the world will not be oriented towards user any more.
+GLTF loading: Added support for base64 data embedded in data URLs.
+GLTF loading: Added support for meshes without explicit indices.
+Added LRU cache for textures in the 3D Engine.
+
+0.65
+====
+Added program icons.
+if 3d rot/move controls aren't shown, make them not grabbable.
+
+0.64
+====
+Added handling of URLs with parcels like sub://substrata.info/parcel/10
+Added "sub" as a URL scheme, added handling on Windows and Mac, so clicking on sub://substrata.info/parcel/10 links in a browser etc.. opens up Substrata.
+Removed 2 sec delay pressing bake lightmap buttons.
+Changed lightmap whitepoint to bring in line with new sky model
+Added "Bake Lightmaps for all objects in parcel" commands.
+
+0.63
+====
+Added initial support for texture LOD.
+Only download mp4s if we are near them.
+Added Edit > Find Object (find by UID) command.
+Added shadows option in options dialog.
+
+0.62
+====
+Made placeholder object use aabb_ws.
+Fixed occasional crash decompressing voxels
+Added editing of parcel writer list and parcel description on website
+Allowing editing/deletion of objects owned by other people, if they are in a parcel you own.
+
+0.61
+====
+Added clouds and cloud shadows.
+Regenerated sky data.
+Fixed issue on some macs which resulted in way too much GPU RAM being used for textures.
+Added gamepad movement support.
+Handling animated gifs with delay time zero.
+GLTF loader: just ignore primitives that do not have triangles mode.
+
+0.60
+====
+Fixed black screen on Mac.
+Disable lightmaps for now on Mac.
+Fixed material previews not rendering properly on Mac.
+Reduced z-fighting artifacts.
+
+0.59
+====
+Optimised 3D engine rendering of many objects.
+Improved transitions between shadow map cascades (reduces some shadow artifacts)
+Drawing preview grid for voxel editing on transparent objects also.
+Made preview grid less aliased.
+Added better support for GLTF files with default materials.
+Removed 60fps cap on Windows/Linux.  (Mac todo)
+Made instances use OpenGL instances.
+Misc. optimisations for object rendering.
+Fixes issue with unselectable objects when scaled by zero in some direction.
+Fixed collidable not updating in physics engine when toggled.
+Added checkbox to toggle 3d ob pos/rot controls.
