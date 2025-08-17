@@ -8,7 +8,6 @@ You can build the MVR Studio client or MVR Studio server from this repository.
 
 ![main screenshot](https://github.com/glaretechnologies/substrata/assets/30285/38a6db93-e729-4f15-8561-5c848eb5391c)
 
-
 ## Usage examples
 
 You can always visit the main MVR Studio world at MVR Studio.info - this is the server that we run, and the main gathering point for MVR Studio users.  However you are also welcome to run your own server!  You can do this using by building the server from this repository, or using one of the prebuilt binaries.
